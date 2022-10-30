@@ -23,7 +23,9 @@
 	LEFT JOIN position ON position = position.ID
 	WHERE position = 1
 
-4.	INSERT INTO audit_user (ID, firstName, lastName, email, position, dept, status)
+4.	CREATE TABLE audit_user LIKE user;
+
+	INSERT INTO audit_user (ID, firstName, lastName, email, position, dept, status)
     	SELECT ID, firstName, lastName, email, position, dept, status
     	FROM user
     	WHERE status = "Inactive";
