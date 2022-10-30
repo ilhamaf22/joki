@@ -1,0 +1,52 @@
+1. 	SELECT * 
+	FROM user 
+	WHERE status = "Active" 
+	ORDER BY firstName ASC;
+	
+	(kalau mau tampilin data lengkap yang uda di merge pake ini)
+	SELECT * 
+	FROM user 
+	INNER JOIN department ON dept = department.ID
+	INNER JOIN position ON position = position.ID
+	WHERE status = "Active" 
+	ORDER BY firstName ASC;
+
+2.	SELECT firstName, lastName, email, positionName 
+	FROM User
+	INNER JOIN department ON dept = department.ID
+	INNER JOIN position ON position = position.ID
+	WHERE departmentName = "BOD"
+
+3. 	SELECT firstName, lastName, email, departmentName, positionName 
+	FROM user 
+	LEFT JOIN department ON dept = department.ID
+	LEFT JOIN position ON position = position.ID
+	WHERE position = 1
+
+4.	INSERT INTO audit_user (ID, firstName, lastName, email, position, dept, status)
+    	SELECT ID, firstName, lastName, email, position, dept, status
+    	FROM user
+    	WHERE status = "Inactive";
+
+    	UPDATE user
+    	SET status = "Active"
+    	WHERE (SELECT status
+    	FROM user
+    	WHERE status = "Inactive");
+
+
+5.	CREATE TABLE new_table LIKE user;
+	
+	INSERT INTO new_table SELECT * FROM user;
+	
+	UPDATE new_table
+	SET dept = 2
+	WHERE dept = 1;
+
+	UPDATE new_table 
+	SET status = "Active"
+	WHERE status = "Inactive";
+
+	UPDATE new_table
+	SET position = 1
+	WHERE firstName LIKE 'ma%';
